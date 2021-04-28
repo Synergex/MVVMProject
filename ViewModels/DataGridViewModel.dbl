@@ -1,0 +1,36 @@
+import System
+import System.Collections.Generic
+import System.Text
+import Microsoft.Toolkit.Mvvm.ComponentModel
+import System.Windows.Input
+import Microsoft.Toolkit.Mvvm.Input
+import MVVMProject.Models
+import System.Collections.ObjectModel
+import System.Text.Json
+import System.IO
+import System.Threading
+
+namespace MVVMProject.ViewModels
+	;;; <summary>
+	;;; Extend Microsoft.Toolkit.Mvvm's ObservableObject here, so that when these properties change, it will let the view know to update itself
+	;;; </summary>
+	public class DataGridViewModel extends ObservableObject
+
+		;;; <summary>
+		;;; Constructor that initializes properties for the view to display
+		;;; </summary>
+		public method DataGridViewModel
+			endparams
+		proc
+			;; Here, data from the json file is read and stored into Users
+			data jsonText = File.ReadAllText("Users.json")
+			Users = JsonSerializer.Deserialize<ObservableCollection<User>>(jsonText)
+		endmethod
+
+		;;; <summary>
+		;;; This ObservableCollection houses the data. I use ObservableCollection instead of a List (for example) because
+		;;; ObservableCollections intuitively update the View if anything in the ObservableCollection changes
+		;;; </summary>
+		public readwrite property Users, @ObservableCollection<User>
+	endclass
+endnamespace

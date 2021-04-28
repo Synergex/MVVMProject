@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="MVVMProject.Views.DataGridView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:MVVMProject.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:MVVMProject.ViewModels"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <!--  Set the DataContext to the ViewModel  -->
+        <vm:DataGridViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <!-- Add the DateTime converter -->
+        <c:EpochToDateTime x:Key="EpochToDateTimeConverter"/>
+    </UserControl.Resources>
+    <DockPanel>
+        <!--  Our data will be shown with this DataGrid  -->
+        <DataGrid AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  ItemsSource="{Binding Users}"
+                  ScrollViewer.CanContentScroll="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Data.ID}"
+                                    Header="ID"/>
+                <DataGridTextColumn Binding="{Binding Data.Name}"
+                                    Header="Name"/>
+                <!-- The user's snoovatar will be an actual picture! -->
+                <DataGridTemplateColumn Width="96"
+                                        Header="Snoovatar">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Data.SnoovatarImg}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!-- In order to display the CreatedUTC as a human readable format, it must be converted -->
+                <DataGridTextColumn Binding="{Binding Data.CreatedUTC,
+                                                      Converter={StaticResource EpochToDateTimeConverter}}"
+                                    Header="Created Date"/>
+                <DataGridTextColumn Binding="{Binding Data.TotalKarma}"
+                                    Header="Total Karma"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

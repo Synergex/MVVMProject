@@ -1,0 +1,46 @@
+import System
+import System.Collections.Generic
+import System.Text
+import System.Text.Json.Serialization
+
+namespace MVVMProject.Models
+	public class User
+		;;; <summary>
+		;;; Holds the UserData object
+		;;; </summary>
+		{JsonPropertyName("data")}
+		public readwrite property Data, @UserData
+
+		public class UserData
+			;;; <summary>
+			;;; ID of the user
+			;;; </summary>
+			{JsonPropertyName("id")}
+			public readwrite property ID, string
+
+			;;; <summary>
+			;;; Name of the user
+			;;; </summary>
+			{JsonPropertyName("name")}
+			public readwrite property Name, string
+
+			;;; <summary>
+			;;; The snoovatar (avatar) of the user, stored as a web address
+			;;; </summary>
+			{JsonPropertyName("snoovatar_img")}
+			public readwrite property SnoovatarImg, string
+
+			;;; <summary>
+			;;; The Unix time the user was created, in UTC
+			;;; </summary>
+			{JsonPropertyName("created_utc")}
+			public readwrite property CreatedUTC, double
+
+			;;; <summary>
+			;;; The amount of total karma (internet points) the user has
+			;;; </summary>
+			{JsonPropertyName("total_karma")}
+			public readwrite property TotalKarma, int
+		endclass
+	endclass
+endnamespace

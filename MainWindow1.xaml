@@ -1,0 +1,9 @@
+﻿<Window x:Class="MVVMProject.MainWindow1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="clr-namespace:MVVMProject.Views"
+        Title="Reddit User Display"
+        Width="458"
+        Height="350">
+    <v:DataGridView/>
+</Window>

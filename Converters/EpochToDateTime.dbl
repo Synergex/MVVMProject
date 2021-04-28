@@ -1,0 +1,36 @@
+import System
+import System.Collections.Generic
+import System.Text
+import System.Windows.Data
+import System.Globalization
+
+namespace MVVMProject.Converters
+	public class EpochToDateTime implements IValueConverter
+
+		;;; <summary>
+		;;; Convert DateTime format back to numbers
+		;;; </summary>
+		public virtual method ConvertBack, @object
+			value, @object 
+			targetType, @Type 
+			parameter, @object 
+			culture, @CultureInfo 
+			endparams
+		proc
+			mreturn DateTimeOffset.Parse((string)value).ToUnixTimeSeconds()
+		endmethod
+
+		;;; <summary>
+		;;; Convert numbers to DateTime format
+		;;; </summary>
+		public virtual method Convert, @object
+			value, @object 
+			targetType, @Type 
+			parameter, @object 
+			culture, @CultureInfo 
+			endparams
+		proc
+			mreturn DateTimeOffset.FromUnixTimeSeconds((long)((double)value)).LocalDateTime
+		endmethod
+	endclass
+endnamespace
